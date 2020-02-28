@@ -33,7 +33,7 @@ class SmallReactivePolicy:
 
 def main():
     print("create env")
-    env = gym.make("Walker2DPyBulletEnv-v0")
+    env = gym.make("Walker2DWindPyBulletEnv-v0")
     env.render(mode="human")
     pi = SmallReactivePolicy(env.observation_space, env.action_space)
 
