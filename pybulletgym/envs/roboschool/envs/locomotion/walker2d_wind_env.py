@@ -19,7 +19,7 @@ class Walker2DWindBulletEnv(WalkerBaseBulletEnv):
                 continue
             # print("WOT", keys, self.parts[keys].bodyPartIndex)
             temp_pos = self.parts[keys].current_position()
-            self._p.applyExternalForce(self.parts[keys].bodyPartIndex, 0, [-30, 0, 0], temp_pos, self._p.WORLD_FRAME)
+            self._p.applyExternalForce(self.parts[keys].bodyPartIndex, 0, [-20, 0, 0], temp_pos, self._p.WORLD_FRAME)
 
         state = self.robot.calc_state()  # also calculates self.joints_at_limit
 

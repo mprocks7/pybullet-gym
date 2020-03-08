@@ -17,7 +17,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         self.stadium_scene = StadiumScene(bullet_client, gravity=9.8, timestep=0.0165/4, frame_skip=4)
         return self.stadium_scene
 
-    def reset(self): 
+    def reset(self):
         if self.stateId >= 0:
             # print("restoreState self.stateId:",self.stateId)
             self._p.restoreState(self.stateId)
@@ -43,38 +43,16 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         pose.move_xyz(init_x, init_y, init_z)  # Works because robot loads around (0,0,0), and some robots have z != 0 that is left intact
         self.cpp_robot.set_pose(pose)
 
-    electricity_cost = -2.0	 # cost for using motors -- this parameter should be carefully tuned against reward for making progress, other values less improtant
+    electricity_cost = -2.0  # cost for using motors -- this parameter should be carefully tuned against reward for making progress, other values less improtant
     stall_torque_cost = -0.1  # cost for running electric current through a motor even at zero rotational speed, small
-    foot_collision_cost = -1.0	# touches another leg, or other objects, that cost makes robot avoid smashing feet into itself
+    foot_collision_cost = -1.0  # touches another leg, or other objects, that cost makes robot avoid smashing feet into itself
     foot_ground_object_names = set(["floor"])  # to distinguish ground and other objects
-    joints_at_limit_cost = -0.1	 # discourage stuck joints
+    joints_at_limit_cost = -0.1  # discourage stuck joints
 
     def step(self, a):
         if not self.scene.multiplayer:  # if multiplayer, action first applied to all robots, then global step() called, then _step() for all robots with the same actions
             self.robot.apply_action(a)
             self.scene.global_step()
-
-        # applyExternalForce
-        # for keys in self.parts.keys():
-        #     if(self.parts[keys].bodyPartIndex == 0):
-        #         continue
-        #     print("WOT", keys, self.parts[keys].bodyPartIndex)
-        #     temp_pos = self.parts[keys].current_position()
-        #     self._p.applyExternalForce(self.parts[keys].bodyPartIndex, 0, [0, 0, 0], temp_pos, self._p.WORLD_FRAME)
-        #     try:
-        #         temp_pos1, temp_ori1 = self._p.getBasePositionAndOrientation(self.parts[keys].bodyPartIndex)
-        #         temp_pos = self.parts[keys].current_position()
-        #         temp_ori = self.parts[keys].current_orientation()
-        # #         # temp_pos, temp_ori = self._p.getBasePositionAndOrientation(self.parts[keys].bodyPartIndex)
-        #         print(self.parts[keys].bodyPartIndex)#, temp_pos, temp_ori)
-        #         print(temp_pos, temp_pos1)#, temp_ori)
-        #         print(temp_ori, temp_ori1)#, temp_ori)
-        #     except:
-        #         # print("no?")
-        #         pass
-        #     # temp_pos, temp_ori = self._p.getBasePositionAndOrientation(self.parts[keys]._p.bodyPartIndex)
-        # # print("WOT", self.parts)
-        # print("DONE!\n\n\n")
 
         state = self.robot.calc_state()  # also calculates self.joints_at_limit
 
