@@ -70,6 +70,14 @@ register(
 	)
 
 register(
+	id='Walker2DSoccerPyBulletEnv-v0',
+	entry_point='pybulletgym.envs.roboschool.envs.locomotion.walker2d_soccer_env:Walker2DSoccerBulletEnv',
+	max_episode_steps=1000,
+	reward_threshold=2500.0
+	)
+
+
+register(
 	id='HalfCheetahPyBulletEnv-v0',
 	entry_point='pybulletgym.envs.roboschool.envs.locomotion.half_cheetah_env:HalfCheetahBulletEnv',
 	max_episode_steps=1000,

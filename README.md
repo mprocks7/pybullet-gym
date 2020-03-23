@@ -1,7 +1,7 @@
 PyBullet Gymperium
 -----------
 
-*The new wind environements are: 'Walker2DWindPyBulletEnv-v0', 'HopperWindPyBulletEnv-v0' and 'HumanoidWindPyBulletEnv-v0'
+*The new wind environements are: 'Walker2DWindPyBulletEnv-v0', 'Walker2DWindPyBulletEnv-v0', 'HopperWindPyBulletEnv-v0' and 'HumanoidWindPyBulletEnv-v0'
 
 *PyBullet Gymperium is an open-source implementation of the OpenAI Gym MuJoCo environments for use with the OpenAI Gym Reinforcement Learning Research Platform in support of open research.*
 

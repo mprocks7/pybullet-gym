@@ -36,6 +36,7 @@ def main():
     print("create env")
     env = gym.make("HumanoidFlagrunHarderPyBulletEnv-v0")
     env.render(mode="human")
+    print("Obs space: ", env.observation_space.shape[0])
     pi = SmallReactivePolicy(env.observation_space, env.action_space)
 
     while 1:

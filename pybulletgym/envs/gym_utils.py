@@ -17,6 +17,21 @@ def get_cube(p, x, y, z):
     bodies = [body]
     return BodyPart(p, part_name, bodies, 0, -1)
 
+def get_ball(p, x, y, z):
+    # print("path = ", pybullet_data.getDataPath())
+    body = p.loadURDF(os.path.join(currentdir, "ball.urdf"), [x, y, z])
+    print(os.path.join(currentdir, "ball.urdf"))
+    # body = p.loadURDF(os.path.join(pybullet_data.getDataPath(), "sphere2red_nocol.urdf"), [x, y, z])
+    p.changeDynamics(body, -1, mass=10)  # match Roboschool
+    part_name, _ = p.getBodyInfo(body)
+    part_name = part_name.decode("utf8")
+    bodies = [body]
+    return BodyPart(p, part_name, bodies, 0, -1)
+    # part_name, _ = p.getBodyInfo(body)
+    # part_name = part_name.decode("utf8")
+    # bodies = [body]
+    # return BodyPart(p, part_name, bodies, 0, -1)
+
 
 def get_sphere(p, x, y, z):
     body = p.loadURDF(os.path.join(pybullet_data.getDataPath(), "sphere2red_nocol.urdf"), [x, y, z])

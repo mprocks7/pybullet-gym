@@ -34,8 +34,9 @@ class SmallReactivePolicy:
 
 
 def main():
-    env = gym.make("HumanoidWindPyBulletEnv-v0")
+    env = gym.make("HumanoidPyBulletEnv-v0")
     env.render(mode="human")
+    print("Obs space: ", env.observation_space.shape[0])
     # env = wrappers.Monitor(env, "~/", video_callable=False ,force=True)
     pi = SmallReactivePolicy(env.observation_space, env.action_space)
 
@@ -49,11 +50,11 @@ def main():
     while 1:
         frame = 0
         score = 0
-        restart_delay = 0
+        restart_delay = 1000000
         obs = env.reset()
        
         while 1:
-            time.sleep(0.02)
+            time.sleep(0.01)
             a = pi.act(obs)
             # print(a)
             # a = random.randrange(obs.size)
@@ -64,7 +65,7 @@ def main():
             distance = 5
             yaw = 0
             humanPos, humanOrn = p.getBasePositionAndOrientation(torsoId)
-            p.resetDebugVisualizerCamera(distance, yaw, -20, humanPos)
+            # p.resetDebugVisualizerCamera(distance, yaw, -20, humanPos)
 
             still_open = 1
             still_open = env.render("human")

@@ -2,7 +2,7 @@ from pybulletgym.envs.roboschool.robots.locomotors.walker_base import WalkerBase
 from pybulletgym.envs.roboschool.robots.robot_bases import MJCFBasedRobot
 import numpy as np
 
- 
+
 class Humanoid(WalkerBase, MJCFBasedRobot):
     self_collision = True
     foot_list = ["right_foot", "left_foot"]  # "left_hand", "right_hand"
