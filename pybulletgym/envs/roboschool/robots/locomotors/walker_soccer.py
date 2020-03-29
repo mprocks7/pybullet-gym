@@ -15,10 +15,11 @@ class WalkerSoccer(Walker2D):
 
     def alive_bonus(self, z, pitch):
         pos = self.parts["torso"].current_position()
+        # self.
         # self.flag.reset_velocity(linearVelocity=np.array([0,0,0]))
         # self.flag.reset_position([pos[0]+5, pos[1], 1])
         if z > 0.8 and abs(pitch) < 1.0:
-            return +1 + self.flag.current_position()[0]
+            return +1 + np.linalg.norm([self.flag.current_position()[1] - self.walk_target_y, self.flag.current_position()[0] - self.walk_target_x])
         else:
             return -1
 
@@ -29,6 +30,8 @@ class WalkerSoccer(Walker2D):
             self._p.resetBasePositionAndOrientation(self.flag.bodies[0], [pos[0]+1, pos[1], 0.5], [0, 0, 0, 1])
         else:
             self.flag = ObjectHelper.get_ball(self._p, pos[0]+1, pos[1], 0.5)
+        self.walk_target_x = self.flag.current_position()[0] 
+        self.walk_target_y = self.flag.current_position()[1] 
             # self.flag = ObjectHelper.get_ball(self._p, -1.5,0,0.05)
 
         # print("info+132: ", self.flag.current_position())
