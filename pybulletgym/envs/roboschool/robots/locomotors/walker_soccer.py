@@ -17,10 +17,13 @@ class WalkerSoccer(Walker2D):
         pos = self.parts["torso"].current_position()
         # self.flag.reset_velocity(linearVelocity=np.array([0,0,0]))
         # self.flag.reset_position([pos[0]+5, pos[1], 1])
-        return +1 if z > 0.8 and abs(pitch) < 1.0 else -1
+        if z > 0.8 and abs(pitch) < 1.0:
+            return +1 + self.flag.current_position()[0]
+        else:
+            return -1
 
     def reset_ball(self):
-        print(self.parts)
+        # print(self.parts)
         pos = self.parts["torso"].current_position()
         if self.flag:
             self._p.resetBasePositionAndOrientation(self.flag.bodies[0], [pos[0]+1, pos[1], 0.5], [0, 0, 0, 1])
@@ -28,7 +31,7 @@ class WalkerSoccer(Walker2D):
             self.flag = ObjectHelper.get_ball(self._p, pos[0]+1, pos[1], 0.5)
             # self.flag = ObjectHelper.get_ball(self._p, -1.5,0,0.05)
 
-        print("info: ", self.flag.bodyPartIndex)
+        # print("info+132: ", self.flag.current_position())
         # self._p.resetBaseVelocity(self.flag.bodyPartIndex, [0,0,0], [0,0,0])
         # self.flag.reset_velocity(linearVelocity=np.array([0,0,0]))
         # self.flag.reset_position([pos[0]+5, pos[1], 1])
