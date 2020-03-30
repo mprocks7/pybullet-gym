@@ -22,7 +22,7 @@ def get_ball(p, x, y, z):
     body = p.loadURDF(os.path.join(currentdir, "ball.urdf"), [x, y, z])
     print(os.path.join(currentdir, "ball.urdf"))
     # body = p.loadURDF(os.path.join(pybullet_data.getDataPath(), "sphere2red_nocol.urdf"), [x, y, z])
-    p.changeDynamics(body, -1, mass=10)  # match Roboschool
+    p.changeDynamics(body, -1, mass=2)  # match Roboschool
     part_name, _ = p.getBodyInfo(body)
     part_name = part_name.decode("utf8")
     bodies = [body]
