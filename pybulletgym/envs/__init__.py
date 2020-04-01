@@ -76,6 +76,12 @@ register(
 	reward_threshold=2500.0
 	)
 
+register(
+	id='Walker2DDribblePyBulletEnv-v0',
+	entry_point='pybulletgym.envs.roboschool.envs.locomotion.walker2d_dribble_env:Walker2DDribbleBulletEnv',
+	max_episode_steps=1000,
+	reward_threshold=2500.0
+	)
 
 register(
 	id='HalfCheetahPyBulletEnv-v0',
