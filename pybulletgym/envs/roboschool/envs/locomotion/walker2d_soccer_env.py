@@ -31,7 +31,7 @@ class Walker2DSoccerBulletEnv(WalkerBaseBulletEnv):
             print("~INF~", state)
             done = True
 
-        self.ball_bonus = 1000*np.linalg.norm([self.robot.flag.current_position()[1] - self.ball_previous_pos_y, self.robot.flag.current_position()[0] - self.ball_previous_pos_x])
+        self.ball_bonus = 1*np.linalg.norm([self.robot.flag.current_position()[1] - self.ball_previous_pos_y, self.robot.flag.current_position()[0] - self.ball_previous_pos_x])
         self.ball_previous_pos_x = self.robot.flag.current_position()[0]
         self.ball_previous_pos_y = self.robot.flag.current_position()[1]
 

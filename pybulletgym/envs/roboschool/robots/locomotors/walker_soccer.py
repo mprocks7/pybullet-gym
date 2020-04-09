@@ -27,11 +27,11 @@ class WalkerSoccer(Walker2D):
         # print(self.parts)
         pos = self.parts["torso"].current_position()
         if self.flag:
-            self._p.resetBasePositionAndOrientation(self.flag.bodies[0], [pos[0]+1, pos[1], 0.5], [0, 0, 0, 1])
+            self._p.resetBasePositionAndOrientation(self.flag.bodies[0], [pos[0]+5, pos[1], 0.5], [0, 0, 0, 1])
         else:
-            self.flag = ObjectHelper.get_ball(self._p, pos[0]+1, pos[1], 0.5)
-        self.walk_target_x = 1000 
-        # self.walk_target_x = self.flag.current_position()[0] 
+            self.flag = ObjectHelper.get_ball(self._p, pos[0]+5, pos[1], 0.5)
+        # self.walk_target_x = 1000 
+        self.walk_target_x = self.flag.current_position()[0] 
         self.walk_target_y = self.flag.current_position()[1] 
             # self.flag = ObjectHelper.get_ball(self._p, -1.5,0,0.05)
 
