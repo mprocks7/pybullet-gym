@@ -11,7 +11,7 @@ import pybullet_data
 
 def get_cube(p, x, y, z):
     body = p.loadURDF(os.path.join(pybullet_data.getDataPath(), "cube_small.urdf"), [x, y, z])
-    p.changeDynamics(body, -1, mass=1.2)  # match Roboschool
+    p.changeDynamics(body, -1, mass=1.5)  # match Roboschool
     part_name, _ = p.getBodyInfo(body)
     part_name = part_name.decode("utf8")
     bodies = [body]
