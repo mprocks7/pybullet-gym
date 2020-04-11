@@ -7,7 +7,7 @@ class WalkerSoccer(Walker2D):
     def __init__(self):
         Walker2D.__init__(self)
         self.flag = None
-
+# walk_tar
     def robot_specific_reset(self, bullet_client):
         Walker2D.robot_specific_reset(self, bullet_client)
         self.reset_ball()
@@ -27,10 +27,10 @@ class WalkerSoccer(Walker2D):
         # print(self.parts)
         pos = self.parts["torso"].current_position()
         if self.flag:
-            self._p.resetBasePositionAndOrientation(self.flag.bodies[0], [pos[0]+5, pos[1], 0.5], [0, 0, 0, 1])
+            self._p.resetBasePositionAndOrientation(self.flag.bodies[0], [pos[0]+0.7, pos[1], 0.5], [0, 0, 0, 1])
         else:
-            self.flag = ObjectHelper.get_ball(self._p, pos[0]+5, pos[1], 0.5)
-        # self.walk_target_x = 1000 
+            self.flag = ObjectHelper.get_ball(self._p, pos[0]+0.7, pos[1], 0.5)
+        # self.walk_target_x = 1 
         self.walk_target_x = self.flag.current_position()[0] 
         self.walk_target_y = self.flag.current_position()[1] 
             # self.flag = ObjectHelper.get_ball(self._p, -1.5,0,0.05)
