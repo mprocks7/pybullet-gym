@@ -9,11 +9,18 @@ class Walker2DKickBulletEnv(WalkerBaseBulletEnv):
         self.robot = WalkerSoccer()
         # self.robot = Walker2D()
         WalkerBaseBulletEnv.__init__(self, self.robot)
+        self.is_init = 0
+
 
     def step(self, a):
         if not self.scene.multiplayer:  # if multiplayer, action first applied to all robots, then global step() called, then _step() for all robots with the same actions
             self.robot.apply_action(a)
             self.scene.global_step()
+
+        if self.is_init == 0:
+            self.ball_previous_pos_x = self.robot.flag.current_position()[0]
+            self.ball_previous_pos_y = self.robot.flag.current_position()[1]
+            self.is_init = 1
 
         state = self.robot.calc_state()  # also calculates self.joints_at_limit
 
@@ -21,13 +28,14 @@ class Walker2DKickBulletEnv(WalkerBaseBulletEnv):
         self.alive = float(self.robot.alive_bonus(state[0] + self.robot.initial_z, self.robot.body_rpy[1]))   # state[0] is body height above ground, body_rpy[1] is pitch
         self.alive = min(self.alive, 0)
         done = self.alive < 0
+
         if not np.isfinite(state).all():
             print("~INF~", state)
             done = True
 
+        self.ball_bonus = 500*np.linalg.norm([self.robot.flag.current_position()[1] - self.ball_previous_pos_y, self.robot.flag.current_position()[0] - self.ball_previous_pos_x])
         self.ball_previous_pos_x = self.robot.flag.current_position()[0]
         self.ball_previous_pos_y = self.robot.flag.current_position()[1]
-        self.ball_bonus = 5000*np.linalg.norm([self.robot.flag.current_position()[1] - self.ball_previous_pos_y, self.robot.flag.current_position()[0] - self.ball_previous_pos_x])
 
         potential_old = self.potential
         # self.curr_robot
