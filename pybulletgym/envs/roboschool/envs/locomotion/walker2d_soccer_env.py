@@ -17,8 +17,9 @@ class Walker2DSoccerBulletEnv(WalkerBaseBulletEnv):
 
         state = self.robot.calc_state()  # also calculates self.joints_at_limit
 
-        self.alive = 0
-        # self.alive = float(self.robot.alive_bonus(state[0] + self.robot.initial_z, self.robot.body_rpy[1]))   # state[0] is body height above ground, body_rpy[1] is pitch
+        # self.alive = 0
+        self.alive = float(self.robot.alive_bonus(state[0] + self.robot.initial_z, self.robot.body_rpy[1]))   # state[0] is body height above ground, body_rpy[1] is pitch
+        self.alive = min(self.alive, 0)
         done = self.alive < 0
         if not np.isfinite(state).all():
             print("~INF~", state)
@@ -26,7 +27,7 @@ class Walker2DSoccerBulletEnv(WalkerBaseBulletEnv):
 
         self.ball_previous_pos_x = self.robot.flag.current_position()[0]
         self.ball_previous_pos_y = self.robot.flag.current_position()[1]
-        self.ball_bonus = 200*np.linalg.norm([self.robot.flag.current_position()[1] - self.ball_previous_pos_y, self.robot.flag.current_position()[0] - self.ball_previous_pos_x])
+        self.ball_bonus = 5000*np.linalg.norm([self.robot.flag.current_position()[1] - self.ball_previous_pos_y, self.robot.flag.current_position()[0] - self.ball_previous_pos_x])
 
         potential_old = self.potential
         # self.curr_robot
